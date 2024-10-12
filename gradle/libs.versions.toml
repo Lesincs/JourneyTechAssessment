@@ -19,6 +19,7 @@ kotlin-coroutines = "1.8.1"
 navigation-compose = "2.8.1"
 hilt-navigation-compose = "1.2.0"
 room = "2.6.1"
+turbine = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,6 +53,7 @@ kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serial
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest-assertion" }
 kotinx-courtines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 [bundles]
 ktor-client = ["ktor-cio", "ktor-serialization", "ktor-logging", "ktor-content-negotiation", "ktor-client-encoding"]

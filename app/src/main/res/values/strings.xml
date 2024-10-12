@@ -2,4 +2,5 @@
     <string name="app_name">JourneyTechAssessment</string>
     <string name="posts_page_title">Posts</string>
     <string name="no_posts_available_hint">No posts available.</string>
+    <string name="update_posts_failed_error_message">Get latest posts failed. Please try again later.</string>
 </resources>

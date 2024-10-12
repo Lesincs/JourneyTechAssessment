@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.bundles.ktor.client)
     implementation(libs.hilt)
+    implementation(libs.turbine)
     implementation(libs.kotlin.serialization)
     implementation(platform(libs.androidx.compose.bom))
 
