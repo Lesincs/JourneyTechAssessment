@@ -1,4 +1,4 @@
-package com.lesincs.journeytechassessment.ui.theme
+package com.lesincs.journeytechassessment.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

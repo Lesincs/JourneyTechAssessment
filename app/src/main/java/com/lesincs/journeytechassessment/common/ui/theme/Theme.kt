@@ -1,4 +1,4 @@
-package com.lesincs.journeytechassessment.ui.theme
+package com.lesincs.journeytechassessment.common.ui.theme
 
 import android.app.Activity
 import android.os.Build

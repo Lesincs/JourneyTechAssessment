@@ -1,4 +1,4 @@
-package com.lesincs.journeytechassessment.ui.theme
+package com.lesincs.journeytechassessment.common.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
