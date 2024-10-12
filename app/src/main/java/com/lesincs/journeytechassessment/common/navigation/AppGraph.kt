@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.lesincs.journeytechassessment.posts.PostsPage
 
 @Composable
 fun AppGraph(modifier: Modifier = Modifier) {
@@ -19,15 +20,7 @@ fun AppGraph(modifier: Modifier = Modifier) {
         startDestination = AppRoutes.Posts,
     ) {
         composable<AppRoutes.Posts> {
-            Text(
-                text = "Posts page",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize()
-                    .clickable {
-                        navController.navigate(AppRoutes.Comments("postId"))
-                    },
-            )
+            PostsPage(navController = navController)
         }
         composable<AppRoutes.Comments> {
             Text(

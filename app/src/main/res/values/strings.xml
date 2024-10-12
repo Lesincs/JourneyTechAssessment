@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JourneyTechAssessment</string>
+    <string name="posts_page_title">Posts</string>
+    <string name="no_posts_available_hint">No posts available.</string>
 </resources>
