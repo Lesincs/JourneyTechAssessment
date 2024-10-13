@@ -1,7 +1,6 @@
 package com.lesincs.journeytechassessment.posts.data
 
 import com.lesincs.journeytechassessment.MainDispatcherRule
-import com.lesincs.journeytechassessment.posts.Post
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.coVerify

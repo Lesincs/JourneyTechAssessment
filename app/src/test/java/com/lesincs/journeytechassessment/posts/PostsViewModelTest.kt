@@ -3,6 +3,7 @@ package com.lesincs.journeytechassessment.posts
 import app.cash.turbine.test
 import com.lesincs.journeytechassessment.MainDispatcherRule
 import com.lesincs.journeytechassessment.R
+import com.lesincs.journeytechassessment.posts.data.Post
 import com.lesincs.journeytechassessment.posts.data.PostsRepository
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery

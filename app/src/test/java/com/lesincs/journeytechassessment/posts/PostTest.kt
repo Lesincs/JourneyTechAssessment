@@ -1,5 +1,6 @@
 package com.lesincs.journeytechassessment.posts
 
+import com.lesincs.journeytechassessment.posts.data.Post
 import io.kotest.matchers.shouldBe
 import org.junit.Test
 

@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.lesincs.journeytechassessment.R
 import com.lesincs.journeytechassessment.common.ui.theme.JourneyTechAssessmentTheme
+import com.lesincs.journeytechassessment.posts.data.Post
 
 @Composable
 fun PostsPage(

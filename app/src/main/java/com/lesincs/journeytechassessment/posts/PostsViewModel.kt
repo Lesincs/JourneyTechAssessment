@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.lesincs.journeytechassessment.R
+import com.lesincs.journeytechassessment.posts.data.Post
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(

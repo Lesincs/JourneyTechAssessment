@@ -1,7 +1,6 @@
 package com.lesincs.journeytechassessment.posts.data
 
 import com.lesincs.journeytechassessment.getMockHttpClient
-import com.lesincs.journeytechassessment.posts.Post
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import org.junit.Test

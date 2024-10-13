@@ -1,4 +1,4 @@
-package com.lesincs.journeytechassessment.posts
+package com.lesincs.journeytechassessment.posts.data
 
 import kotlinx.serialization.Serializable
 
