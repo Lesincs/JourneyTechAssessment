@@ -18,7 +18,10 @@ private const val JSON_PLACEHOLDER_URL = "https://jsonplaceholder.typicode.com"
 
 fun getHttpClient(): HttpClient = HttpClient(CIO) {
     install(ContentNegotiation) {
-        json(Json { ignoreUnknownKeys = true })
+        json(Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        })
     }
 
     install(Logging) {
