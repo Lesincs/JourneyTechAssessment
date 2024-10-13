@@ -76,6 +76,7 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     kapt(libs.hilt.compiler)
 
+    testImplementation(libs.ktor.mock)
     testImplementation(libs.junit)
     testImplementation(libs.kotest.assertions)
     testImplementation(libs.kotinx.courtines.test)

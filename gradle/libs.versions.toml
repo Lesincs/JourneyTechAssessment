@@ -49,6 +49,7 @@ ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-jso
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging-jvm", version.ref = "ktor" }
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-encoding = { group = "io.ktor", name = "ktor-client-encoding", version.ref = "ktor" }
+ktor-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest-assertion" }
