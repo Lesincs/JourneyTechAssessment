@@ -2,16 +2,18 @@ package com.lesincs.journeytechassessment.posts.data
 
 import com.lesincs.journeytechassessment.posts.Post
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-class PostsRepository @Inject constructor() {
+class PostsRepository @Inject constructor(
+    private val localDataSource: PostsLocalDataSource,
+    private val remoteDataSource: PostsRemoteDataSource,
+) {
 
-    fun getPostsFlow(): Flow<List<Post>> {
-        return flowOf(emptyList())
-    }
+    fun getPostsFlow(): Flow<List<Post>> = localDataSource.getPostsFlow()
 
     suspend fun updatePosts(): Boolean {
-        return false
+        val posts = remoteDataSource.getPosts() ?: return false
+        localDataSource.updatePosts(posts)
+        return true
     }
 }
