@@ -37,6 +37,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -176,10 +177,10 @@ private fun PostItem(
     ListItem(
         modifier = Modifier.clickable { onPostClicked(post) },
         headlineContent = {
-            Text(post.title)
+            Text(text = post.title, fontSize = 20.sp)
         },
         supportingContent = {
-            Text(post.body)
+            Text(text = post.body, fontSize = 16.sp)
         }
     )
 }
