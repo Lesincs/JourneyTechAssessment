@@ -1,6 +1,5 @@
-package com.lesincs.journeytechassessment.comments
+package com.lesincs.journeytechassessment.comments.data
 
-import com.lesincs.journeytechassessment.comments.data.Comment
 import com.lesincs.journeytechassessment.comments.data.persistance.CommentDao
 import com.lesincs.journeytechassessment.comments.data.persistance.CommentEntity
 import com.lesincs.journeytechassessment.common.db.AppDatabase

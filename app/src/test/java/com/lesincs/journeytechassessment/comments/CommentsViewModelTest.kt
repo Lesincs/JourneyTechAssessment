@@ -5,6 +5,7 @@ import app.cash.turbine.test
 import com.lesincs.journeytechassessment.MainDispatcherRule
 import com.lesincs.journeytechassessment.R
 import com.lesincs.journeytechassessment.comments.data.Comment
+import com.lesincs.journeytechassessment.comments.data.CommentsRepository
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.every

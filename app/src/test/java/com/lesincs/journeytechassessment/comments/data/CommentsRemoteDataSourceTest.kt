@@ -1,11 +1,8 @@
-package com.lesincs.journeytechassessment.comments
+package com.lesincs.journeytechassessment.comments.data
 
-import com.lesincs.journeytechassessment.comments.data.Comment
 import com.lesincs.journeytechassessment.getMockHttpClient
-import com.lesincs.journeytechassessment.posts.data.Post
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
 import org.junit.Test
 
 class CommentsRemoteDataSourceTest {

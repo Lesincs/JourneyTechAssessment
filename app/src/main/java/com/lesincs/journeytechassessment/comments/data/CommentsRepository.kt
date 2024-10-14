@@ -1,6 +1,5 @@
-package com.lesincs.journeytechassessment.comments
+package com.lesincs.journeytechassessment.comments.data
 
-import com.lesincs.journeytechassessment.comments.data.Comment
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

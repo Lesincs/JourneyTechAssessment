@@ -1,7 +1,6 @@
-package com.lesincs.journeytechassessment.comments
+package com.lesincs.journeytechassessment.comments.data
 
 import com.lesincs.journeytechassessment.MainDispatcherRule
-import com.lesincs.journeytechassessment.comments.data.Comment
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.coVerify
