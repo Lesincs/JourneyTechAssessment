@@ -3,4 +3,7 @@
     <string name="posts_page_title">Posts</string>
     <string name="no_posts_available_hint">No posts available.</string>
     <string name="update_posts_failed_error_message">Get latest posts failed. Please try again later.</string>
+    <string name="search_posts_icon_content_description">search posts</string>
+    <string name="search_close_button_content_description">search close button</string>
+    <string name="search_posts_place_holder">search posts</string>
 </resources>

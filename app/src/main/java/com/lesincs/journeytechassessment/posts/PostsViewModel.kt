@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.lesincs.journeytechassessment.R
 import com.lesincs.journeytechassessment.posts.data.Post
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
@@ -28,8 +30,12 @@ class PostsViewModel @Inject constructor(
     private val _updatePostsFailedErrorMessageResIdStateFlow:MutableStateFlow<Int?> = MutableStateFlow(null)
     val updatePostsFailedErrorMessageResIdStateFlow= _updatePostsFailedErrorMessageResIdStateFlow.asStateFlow()
 
+    @OptIn(FlowPreview::class)
     val posts: StateFlow<List<Post>> =
-        combine(postsRepository.getPostsFlow(), _searchQueryStateFlow) { posts, searchQuery ->
+        combine(
+            postsRepository.getPostsFlow(),
+            _searchQueryStateFlow.debounce(SEARCH_QUERY_DEBOUNCE_MILLIS),
+        ) { posts, searchQuery ->
             if (searchQuery.isEmpty()) {
                 posts
             } else {
@@ -62,5 +68,9 @@ class PostsViewModel @Inject constructor(
 
     fun onUpdatePostsFailedErrorMessageShown() {
         _updatePostsFailedErrorMessageResIdStateFlow.value = null
+    }
+
+    companion object {
+        private const val SEARCH_QUERY_DEBOUNCE_MILLIS = 100L
     }
 }
