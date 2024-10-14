@@ -1,5 +1,6 @@
 package com.lesincs.journeytechassessment.common.ui.component
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -29,6 +30,10 @@ fun SearchTopAppBar(
 ) {
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(focusRequester) { focusRequester.requestFocus() }
+    BackHandler {
+        onHideSearchBar()
+        onSearchQueryChange("")
+    }
     SearchBar(
         modifier = modifier.focusRequester(focusRequester),
         inputField = {
