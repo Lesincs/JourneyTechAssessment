@@ -1,5 +1,8 @@
 package com.lesincs.journeytechassessment.comments.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Comment(
     val id: String,
     val postId: String,
