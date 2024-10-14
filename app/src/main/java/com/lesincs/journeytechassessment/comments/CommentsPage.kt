@@ -1,8 +1,7 @@
-package com.lesincs.journeytechassessment.posts
+package com.lesincs.journeytechassessment.comments
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,50 +37,38 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.lesincs.journeytechassessment.R
+import com.lesincs.journeytechassessment.comments.data.Comment
 import com.lesincs.journeytechassessment.common.ui.component.EmptyListHintText
 import com.lesincs.journeytechassessment.common.ui.component.SearchTopAppBar
 import com.lesincs.journeytechassessment.common.ui.theme.JourneyTechAssessmentTheme
-import com.lesincs.journeytechassessment.posts.data.Post
 
 @Composable
-fun PostsPage(
-    onPostClicked: (Post) -> Unit,
-) {
-    val postsViewModel = hiltViewModel<PostsViewModel>()
-    val isRefreshing: Boolean =
-        postsViewModel.isRefreshingPostsStateFlow.collectAsStateWithLifecycle().value
-    val posts: List<Post> = postsViewModel.posts.collectAsStateWithLifecycle().value
-    val errorMessageResId: Int? =
-        postsViewModel.updatePostsFailedErrorMessageResIdStateFlow.collectAsStateWithLifecycle().value
-    val searchQuery: String =
-        postsViewModel.searchQueryStateFlow.collectAsStateWithLifecycle().value
-    PostsScaffold(
-        errorMessageResId = errorMessageResId,
-        isRefreshing = isRefreshing,
-        posts = posts,
-        onRefresh = postsViewModel::updatePosts,
-        onErrorMessageShown = postsViewModel::onUpdatePostsFailedErrorMessageShown,
-        searchQuery = searchQuery,
-        onSearchQueryChange = postsViewModel::updateSearchQuery,
-        onPostClicked = onPostClicked,
+fun CommentsPage(onBack: () -> Unit) {
+    CommentsScaffold(
+        errorMessageResId = null,
+        isRefreshing = false,
+        comments = listOf(),
+        onRefresh = {},
+        onErrorMessageShown = {},
+        searchQuery = "",
+        onSearchQueryChange = {},
+        onBack = onBack,
     )
 }
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun PostsScaffold(
+private fun CommentsScaffold(
     @StringRes errorMessageResId: Int?,
     isRefreshing: Boolean,
-    posts: List<Post>,
+    comments: List<Comment>,
     onRefresh: () -> Unit,
     onErrorMessageShown: () -> Unit,
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit,
-    onPostClicked: (Post) -> Unit,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
@@ -91,11 +79,12 @@ private fun PostsScaffold(
         }
     }
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = {
-            PostsTopAppBar(
+            CommentsTopAppBar(
                 onSearchQueryChange = onSearchQueryChange,
                 searchQuery = searchQuery,
+                onBack = onBack,
             )
         },
         snackbarHost = {
@@ -108,16 +97,16 @@ private fun PostsScaffold(
             modifier = Modifier.padding(paddingValues),
             onRefresh = onRefresh,
         ) {
-            if (posts.isEmpty()) {
+            if (comments.isEmpty()) {
                 EmptyListHintText(
-                    textResId = R.string.no_posts_available_hint,
+                    textResId = R.string.no_comments_available_hint,
                 )
                 return@PullToRefreshBox
             }
             LazyColumn {
-                items(posts) { post ->
+                items(comments) { comment ->
                     HorizontalDivider()
-                    PostItem(post = post, onPostClicked = onPostClicked)
+                    CommentItem(comment)
                 }
             }
         }
@@ -126,9 +115,10 @@ private fun PostsScaffold(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PostsTopAppBar(
+private fun CommentsTopAppBar(
     onSearchQueryChange: (String) -> Unit,
     searchQuery: String,
+    onBack: () -> Unit,
 ) {
     var showSearchBar by rememberSaveable {
         mutableStateOf(false)
@@ -152,7 +142,7 @@ private fun PostsTopAppBar(
                 )
             } else {
                 CenterAlignedTopAppBar(
-                    title = { Text(stringResource(R.string.posts_page_title)) },
+                    title = { Text(stringResource(R.string.comments_page_title)) },
                     actions = {
                         IconButton(onClick = { showSearchBar = true }) {
                             Icon(
@@ -160,70 +150,82 @@ private fun PostsTopAppBar(
                                 contentDescription = stringResource(R.string.search_posts_icon_content_description),
                             )
                         }
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBack) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = null
+                            )
+                        }
                     }
                 )
+
             }
         }
     }
 }
 
 @Composable
-private fun PostItem(
-    post: Post,
-    onPostClicked: (Post) -> Unit,
-) {
+private fun CommentItem(comment: Comment, modifier: Modifier = Modifier) {
     ListItem(
-        modifier = Modifier.clickable { onPostClicked(post) },
+        modifier = modifier,
         headlineContent = {
-            Text(post.title)
+            Text(comment.body)
         },
         supportingContent = {
-            Text(post.body)
+            Text(comment.email)
+        },
+        overlineContent = {
+            Text(comment.name)
         }
     )
 }
 
 @Preview
 @Composable
-private fun PostsScaffoldPreview_With_Posts() {
+private fun CommentsScaffoldPreview_With_Comments() {
     JourneyTechAssessmentTheme {
-        PostsScaffold(
+        CommentsScaffold(
+            errorMessageResId = null,
             isRefreshing = false,
-            posts = listOf(
-                Post(
-                    id = "1",
-                    title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                    body = "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto"
-                ),
-                Post(
-                    id = "2",
-                    title = "dolorem eum magni eos aperiam quia",
-                    body = "ut aspernatur corporis harum nihil quis provident sequi\\nmollitia nobis aliquid molestiae\\nperspiciatis et ea nemo ab reprehenderit accusantium quas\\nvoluptate dolores velit et doloremque molestiae"
-                ),
+            comments = listOf(
+                Comment(
+                    id = "eros",
+                    postId = "natum",
+                    name = "Socorro Kramer",
+                    email = "christopher.fitzpatrick@example.com",
+                    body = "laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium"
+                ), Comment(
+                    id = "bibendum",
+                    postId = "dictum",
+                    name = "Rodolfo Evans",
+                    email = "annie.fitzgerald@example.com",
+                    body = "est natus enim nihil est dolore omnis voluptatem numquam\\net omnis occaecati quod ullam at\\nvoluptatem error expedita pariatur\\nnihil sint nostrum voluptatem reiciendis et"
+                )
             ),
             onRefresh = {},
-            errorMessageResId = null,
             onErrorMessageShown = {},
-            searchQuery = "",
+            searchQuery = "fermentum",
             onSearchQueryChange = {},
-            onPostClicked = {},
+            onBack = {},
         )
     }
 }
 
 @Preview
 @Composable
-private fun PostsScaffoldPreview_Empty_Posts() {
+private fun CommentsScaffoldPreview_Empty_Comments() {
     JourneyTechAssessmentTheme {
-        PostsScaffold(
-            isRefreshing = false,
-            posts = listOf(),
-            onRefresh = {},
+        CommentsScaffold(
             errorMessageResId = null,
+            isRefreshing = false,
+            comments = listOf(),
+            onRefresh = {},
             onErrorMessageShown = {},
-            searchQuery = "",
+            searchQuery = "fermentum",
             onSearchQueryChange = {},
-            onPostClicked = {},
+            onBack = {},
         )
     }
 }
