@@ -24,6 +24,7 @@ fun SearchTopAppBar(
     onSearchQueryChange: (String) -> Unit,
     onHideSearchBar: () -> Unit,
     searchQuery: String,
+    placeHolderText: String,
     modifier: Modifier = Modifier,
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -49,7 +50,7 @@ fun SearchTopAppBar(
                         )
                     }
                 },
-                placeholder = { Text(stringResource(R.string.search_posts_place_holder)) },
+                placeholder = { Text(placeHolderText) },
                 onSearch = {},
                 expanded = false,
                 onExpandedChange = {},

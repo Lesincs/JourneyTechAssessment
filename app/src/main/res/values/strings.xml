@@ -8,5 +8,6 @@
     <string name="search_posts_place_holder">search posts</string>
     <string name="no_comments_available_hint">No comments available.</string>
     <string name="comments_page_title">Comments</string>
+    <string name="search_comments_place_holder">search comments</string>
     <string name="update_comments_failed_error_message">Get latest comments for this post failed. Please try again later.</string>
 </resources>

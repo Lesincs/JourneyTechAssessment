@@ -37,6 +37,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lesincs.journeytechassessment.R
 import com.lesincs.journeytechassessment.comments.data.Comment
 import com.lesincs.journeytechassessment.common.ui.component.EmptyListHintText
@@ -45,14 +47,23 @@ import com.lesincs.journeytechassessment.common.ui.theme.JourneyTechAssessmentTh
 
 @Composable
 fun CommentsPage(onBack: () -> Unit) {
+    val commentsViewModel = hiltViewModel<CommentsViewModel>()
+    val isRefreshing: Boolean =
+        commentsViewModel.isRefreshingCommentsStateFlow.collectAsStateWithLifecycle().value
+    val comments: List<Comment> = commentsViewModel.comments.collectAsStateWithLifecycle().value
+    val errorMessageResId: Int? =
+        commentsViewModel.updateCommentsFailedErrorMessageResIdStateFlow.collectAsStateWithLifecycle().value
+    val searchQuery: String =
+        commentsViewModel.searchQueryStateFlow.collectAsStateWithLifecycle().value
+
     CommentsScaffold(
-        errorMessageResId = null,
-        isRefreshing = false,
-        comments = listOf(),
-        onRefresh = {},
-        onErrorMessageShown = {},
-        searchQuery = "",
-        onSearchQueryChange = {},
+        errorMessageResId = errorMessageResId,
+        isRefreshing = isRefreshing,
+        comments = comments,
+        onRefresh = commentsViewModel::updateComments,
+        onErrorMessageShown = commentsViewModel::onUpdateCommentsFailedErrorMessageShown,
+        searchQuery = searchQuery,
+        onSearchQueryChange = commentsViewModel::updateSearchQuery,
         onBack = onBack,
     )
 }
@@ -139,6 +150,7 @@ private fun CommentsTopAppBar(
                     onSearchQueryChange = onSearchQueryChange,
                     onHideSearchBar = { showSearchBar = false },
                     searchQuery = searchQuery,
+                    placeHolderText = stringResource(R.string.search_comments_place_holder),
                 )
             } else {
                 CenterAlignedTopAppBar(

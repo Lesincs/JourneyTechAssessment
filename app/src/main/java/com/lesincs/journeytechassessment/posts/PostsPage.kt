@@ -149,6 +149,7 @@ private fun PostsTopAppBar(
                     onSearchQueryChange = onSearchQueryChange,
                     onHideSearchBar = { showSearchBar = false },
                     searchQuery = searchQuery,
+                    placeHolderText = stringResource(R.string.search_posts_place_holder),
                 )
             } else {
                 CenterAlignedTopAppBar(
