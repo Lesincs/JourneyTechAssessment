@@ -71,6 +71,7 @@ class PostsViewModelTest {
             constructSut()
 
             sut.posts.test {
+                awaitItem() shouldBe emptyList()
                 awaitItem() shouldBe posts
             }
         }
@@ -88,6 +89,7 @@ class PostsViewModelTest {
             sut.updateSearchQuery("pericula")
 
             sut.posts.test {
+                awaitItem() shouldBe emptyList()
                 awaitItem() shouldBe listOf(
                     Post(
                         id = "finibus",
@@ -113,6 +115,7 @@ class PostsViewModelTest {
             constructSut()
 
             sut.posts.test {
+                awaitItem() shouldBe emptyList()
                 awaitItem() shouldBe listOf(
                     Post(
                         id = "finibus",
@@ -156,6 +159,7 @@ class PostsViewModelTest {
             sut.updatePosts()
 
             sut.posts.test {
+                awaitItem() shouldBe emptyList()
                 awaitItem() shouldBe listOf(
                     Post(
                         id = "finibus",
