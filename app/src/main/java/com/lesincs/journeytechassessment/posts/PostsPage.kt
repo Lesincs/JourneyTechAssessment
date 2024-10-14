@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.lesincs.journeytechassessment.R
 import com.lesincs.journeytechassessment.common.ui.component.EmptyListHintText
 import com.lesincs.journeytechassessment.common.ui.component.SearchTopAppBar
