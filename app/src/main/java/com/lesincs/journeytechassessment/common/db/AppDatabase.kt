@@ -4,13 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.lesincs.journeytechassessment.comments.data.persistance.CommentDao
+import com.lesincs.journeytechassessment.comments.data.persistance.CommentEntity
 import com.lesincs.journeytechassessment.posts.data.persistance.PostDao
 import com.lesincs.journeytechassessment.posts.data.persistance.PostEntity
 
-@Database(entities = [PostEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PostEntity::class, CommentEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun postDao(): PostDao
+
+    abstract fun commentDao(): CommentDao
 
     companion object {
         @Volatile
