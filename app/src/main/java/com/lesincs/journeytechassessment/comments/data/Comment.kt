@@ -6,4 +6,9 @@ data class Comment(
     val name: String,
     val email: String,
     val body: String,
-)
+) {
+    fun matchesSearchQuery(query: String): Boolean =
+        name.contains(other = query, ignoreCase = true) ||
+                email.contains(other = query, ignoreCase = true) ||
+                body.contains(other = query, ignoreCase = true)
+}
