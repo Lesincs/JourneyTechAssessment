@@ -2,16 +2,20 @@ package com.lesincs.journeytechassessment.comments
 
 import com.lesincs.journeytechassessment.comments.data.Comment
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-class CommentsRepository @Inject constructor() {
+class CommentsRepository @Inject constructor(
+    private val localDataSource: CommentsLocalDataSource,
+    private val remoteDataSource: CommentsRemoteDataSource,
+) {
 
     fun getCommentsFlow(postId: String): Flow<List<Comment>> {
-        return flowOf()
+        return localDataSource.getCommentsFlow(postId = postId)
     }
 
     suspend fun updateComments(postId: String): Boolean {
-        return false
+        val comments = remoteDataSource.getComments(postId = postId) ?: return false
+        localDataSource.updateComments(postId = postId, comments = comments)
+        return true
     }
 }
