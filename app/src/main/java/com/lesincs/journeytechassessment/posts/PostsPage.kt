@@ -115,7 +115,7 @@ private fun PostsScaffold(
                 return@PullToRefreshBox
             }
             LazyColumn {
-                items(posts) { post ->
+                items(posts, key = Post::id) { post ->
                     HorizontalDivider()
                     PostItem(post = post, onPostClicked = onPostClicked)
                 }

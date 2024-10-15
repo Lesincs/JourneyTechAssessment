@@ -117,7 +117,7 @@ private fun CommentsScaffold(
                 return@PullToRefreshBox
             }
             LazyColumn {
-                items(comments) { comment ->
+                items(comments, key = Comment::id) { comment ->
                     HorizontalDivider()
                     CommentItem(comment)
                 }
